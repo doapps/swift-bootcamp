@@ -124,18 +124,62 @@ default:
     print("not move at all")
 }
 
+//Functions
+//definition
+
+//Naming
+func functionNameLowerCamelCaseWith(FirstParam first:String, andLastParam second: String)->Void{
+}
+functionNameLowerCamelCaseWith(FirstParam: "", andLastParam: "")
+
+//returning multiple values
+func functionReturnMultipleWith() -> (first: String,second: String){
+    return (first:"Halo",second:"you")
+}
+print("\(functionReturnMultipleWith().first) \(functionReturnMultipleWith().second)")
+
+//default parameters value
+func someFunction(value: Int = 1500){
+    print(value)
+}
+someFunction()
+someFunction(value: 17)
+
+//inout parameters
+func changeNumeritoValue(num: inout Int){
+    num = 1720
+}
+var myNumerito = 16
+changeNumeritoValue(num: &myNumerito)
+print(myNumerito)
+
+//Optionals
+var message: String? = nil
+var otherMessage: String? = nil
+message = "HALO"
+if let message = message{ //<--shadowing
+    print("\(message) you")
+}
+
+if let message = message, let otherMessage = otherMessage{
+    print("this will appear only if the evaluated variables exists")
+}
+func validateAccountWith(number: Int?){
+    guard let number = number else{
+        return
+    }
+}
 
 
+//Array
+//Definition
+let myAwesomeArray: [Int] = []
+let awesomeNames = ["Jack", "Jhon"]
 
-
-
-
-
-
-
-
-
-
+//Dictionaries
+//definition
+let myDictionary = ["key":"value"]
+let myOtherDictionary: [Int: String] = [:]
 
 
 
