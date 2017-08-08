@@ -2,36 +2,29 @@
 
 import UIKit
 
-//closures
-//block of code that executes what is inside []
+//1.- Closures
+//Se comporta igual a una funcion
 
-var testing: String = "HALO"
 var myClosure = {
     (_ te:Int) -> Int in
         return te + 100
 }
-//pass a closure as a parameter
+
+//pasar un closure como parametro
 func executeClosure(_ otherClosure: (_ numb: Int) -> Int) -> Int{
-    return otherClosure(20)
+    return otherClosure(400)
 }
 
 var final = executeClosure(myClosure)
 print(final)
 
-// executeClosure( ((20){print("DWDWDWDd")}) )
-// executeClosure(myClosure)
-//executeClosure(func (num: Int): Int -> {
-//    print(num)
-//    })
-
-
-//More compact
+// closure mas compactas
 var multiplyNumbers: (Int, Int) -> Int = {$0 * $1}
 var mayorNumbers: (Int, Int) -> Int = {$0 < $1 ? $1 : $0}
 mayorNumbers(3,4)
 
-//Structs
-//objects are copied
+//2.- Structures
+//son estructuras las cuales son copiadas cuando son instanciadas y pasadas por parametros
 struct Location{
     var x = 15
     var y = 0
@@ -44,12 +37,12 @@ struct Location{
             y = newValue.1
         }
     }
-    mutating func change(){
+    mutating func changeX(){ //se utiliza keyword mutating si se desea alterar las propiedades
         self.x += 10
     }
 }
-//Classes
-//objects are referenced
+//3.- Classes
+//son estructuras las cuales son referenciadas cuando son instanciadas y pasadas por parametros
 
 class Book{
     var name = ""
@@ -59,8 +52,8 @@ myBook.name = "awesome book"
 let otherBook = myBook
 print(myBook === otherBook) //<-- check if two references point to the same object
 
-//Inheritance
-//A class can be subclass only one superclass
+//4.- Herencia
+//Una clase solamente puede heredar de una sola super clase
 class Person{
     var firstName = ""
     var lastName = ""
@@ -70,7 +63,11 @@ class Person{
 }
 //Use final when a class cant be subclassed
 final class Student: Person{
-    var firstGrade = 0
+  var firstGrade = 0 {
+    didSet{
+      print("had my first grade")
+    }
+  }
     var secondGrade = 0
     var averageGrade: Int{
         get{
@@ -80,11 +77,14 @@ final class Student: Person{
 }
 
 let student = Student()
+student.firstGrade = 15
 student.firstName = "john"
 student.lastName = "hopkins"
 student.sayMyName()
 
-//Protocols
+
+//5.- Protocols
+//Protocolos definen "comportamiento" lo cual significa que una clase que aplique un protocolo debera satisfacer las propiedades y metodos que este ultimo demande.
 protocol Printable{
     var message: String { get set }
     func showMessage()
@@ -119,12 +119,8 @@ announcer.showMessage()
 
 
 
-func sumaDosDigitos(con primer:Int, y segundo:Int) -> Int {
-    return primer + segundo
-}
-
-//enum
-
+//6.- Enum
+//Enum es un tipo de struct especial que permite una mejor organizacion de codigo en swift
 enum Digits: Int{
     case uno = 1
     case dos
@@ -164,37 +160,16 @@ class Cat{
 }
 
 enum BuyMascot{
-    case awesomeDog(doggie: Dog)
-    case awesomeCat(kittie: Cat)
+    case youBoughtADog(doggie: Dog)
+    case youBoughtACat(kittie: Cat)
 }
 
-let myCat = BuyMascot.awesomeCat(kittie: Cat())
+let myCat = BuyMascot.youBoughtACat(kittie: Cat())
 
 switch myCat {
-    case .awesomeDog(let dog):
-        print("you bought a dog")
-    case .awesomeCat(let cat):
-        print("you bought a cat")
+    case .youBoughtADog(let dog):
+        print("you bought a dog") //Algo paso cuando compraste un perro
+    case .youBoughtACat(let cat):
+        print("you bought a cat") // Algo paso cuando compraste un gato
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

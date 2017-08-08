@@ -1,21 +1,20 @@
 //: Playground - noun: a place where people can play
 
-//This file will containt swift 3 examples for the basics of the language. In order to achieve the complete learning of the language you should practice in the order.
 
 
 import UIKit
 
-//Variables and constants
+//1.- Variables and constants
 
-//var
-//let
-//set names in lowwercamellcase
+//var se utiliza para declarar una variable
+//let se utiliza para declarar una constante
+//se recomienda persistemente que se declaren los nombres en lowwercamellcase
 
 var thisIsVariable = 0  //mutable
 let thisIsConstant = 0  //inmutable
 let 😀 = " happy "
 
-//Operators
+//2.- Operadores
 
 thisIsVariable += 10
 thisIsVariable -= 2
@@ -27,16 +26,16 @@ sayHi += " jhon"
 sayHi = "hello" + " jhon " + "Hopkins"
 
 
-//TYPES
-//Int, Float, Double, Bool, String, Character, YourOwnType
-//Float less decimal
-//Double more decimal
-//use UpperCamelCase
+//3.- Tipos
+//Existen los tipos Int, Float, Double, Bool, String, Character, YourOwnType
+//Float para menos decimales
+//Double para más decimales
+//usa UpperCamelCase para la definicion de tipos
 
 let integerNumber: Int = 15
 
 
-//String
+//4.-String
 let namePerson = "Jhon"
 let lastName = "Hopkins"
 let jonhSayHi = "Hello" + namePerson + lastName
@@ -46,8 +45,8 @@ interpolationSayHi.lowercased()
 interpolationSayHi.isEmpty
 
 
-//Tuples
-//recommend use: send and receive multiple data from a function
+//5.- Tuplas
+//se recomienda su uso en funciones cuando se quiere enviar y recibir multiples parametros
 var worker = ("John", 35, true)
 worker.0
 worker.1
@@ -57,28 +56,30 @@ yetOtherWorker.name
 yetOtherWorker.age
 yetOtherWorker.isActive
 
-//IF statement
-//cmd+[ or ] for identation
+//6.- Condicionales
 
+if yetOtherWorker.name == "John"{
+  print("I found a John")
+}
 
-//loops
-
+//7.- Loops
 //continue----->next item in loop
 //break ------->leave loop
-
+let myOtherAwesomeArray = ["1","2","3","4","5","6","999999"]
+for (index,number) in myOtherAwesomeArray.enumerated(){
+  print("index=\(index),number=\(number)")
+}
 for x in 1..<5 {
     print(x)
 }
-
 var i = 0
 while i<10{
     print("\(i)")
     i+=1
 }
 
-
-//Switching
-//Ones the case is match the control flow will continue and ignore the other cases
+//8.- Switching
+//Onces the case is match the control flow will continue and ignore the other cases
 //for a fallthrough escenario use the kayword fallthrough
 
 let up = 1
@@ -90,10 +91,10 @@ let movement = 1
 switch movement {
 case up:
     print("you went up")
-    fallthrough
+    fallthrough //<-----Mira esto
 case right:
     print("you went right")
-    fallthrough
+    fallthrough //<-----Mira esto
 case down:
     print("yow went down")
 case left:
@@ -104,7 +105,7 @@ default:
 
 var myMovements = (up: 0,right: 0, down: 0, left: 0)
 switch myMovements {
-case (1,_,_,_):
+case (1,_,_,_):     // los subguiones permiten ignorar ciertos valores
     print("you went up")
 case (_,1,_,_):
     print("you went right")
@@ -118,14 +119,16 @@ default:
 
 var myRunningMovements = (up: 1,right: 1, down: 0, left: 0)
 switch myRunningMovements {
-case let (up,right,_,_) where up == 1 && right == 1:
+case let (up,right,_,_) where up == 1 && right == 1: //Se puede aplicar condiciones en el case
     print("runing up==\(up) and right==\(right) corner")
 default:
     print("not move at all")
 }
 
-//Functions
+//9.- Functions
 //definition
+func functionName(){
+}
 
 //Naming
 func functionNameLowerCamelCaseWith(FirstParam first:String, andLastParam second: String)->Void{
@@ -146,6 +149,8 @@ someFunction()
 someFunction(value: 17)
 
 //inout parameters
+// existen restricciones dependiendo del tipo de estructura que se desee enviar
+// es util para tipos primitivos como Int, String, Double, Float, etc
 func changeNumeritoValue(num: inout Int){
     num = 1720
 }
@@ -153,30 +158,35 @@ var myNumerito = 16
 changeNumeritoValue(num: &myNumerito)
 print(myNumerito)
 
-//Optionals
+//10.-Optionals
+//Se debe de considerar a los optional como un tipo de datos más
 var message: String? = nil
 var otherMessage: String? = nil
 message = "HALO"
-if let message = message{ //<--shadowing
+if let message = message{ //<--shadowing: puedo crear otra variable (dentro del scope) que se llame igual al optional
     print("\(message) you")
 }
 
-if let message = message, let otherMessage = otherMessage{
+if let message = message, let otherMessage = otherMessage{ //<- safe unwrapper
     print("this will appear only if the evaluated variables exists")
 }
 func validateAccountWith(number: Int?){
-    guard let number = number else{
+    guard number != nil else{
+      print("number=\(number!)") //<--- Force unwrapper.
         return
     }
 }
 
-
-//Array
+//11.- Array
+//IMPORTANTE: para esta estructura si es imperativo el orden en el que almacena los elementos
 //Definition
+//El uso es similar a otros lenguajes
 let myAwesomeArray: [Int] = []
 let awesomeNames = ["Jack", "Jhon"]
 
-//Dictionaries
+//12.- Diccionarios
+//Se utiliza "llaves" para acceder al contenido almacenado
+//IMPORTANTE: a esta estructura ignora el orden en el que se almacena los elementos
 //definition
 let myDictionary = ["key":"value"]
 let myOtherDictionary: [Int: String] = [:]
